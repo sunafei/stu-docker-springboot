@@ -1,0 +1,30 @@
+server:
+  port: 8080
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://mydb:3306/test?characterEncoding=utf8
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
+    filters: stat
+    maxActive: 20
+    initialSize: 1
+    #最大连接等待超时时间（毫秒）
+    maxWait: 60000
+    #打开PScache，并指定每个PScache连接的大小
+    poolPreparedStatments: true
+    maxPoolPreparedStatmentPerConnectionSize: 20
+    #打开mergeSql功能，开启执行超5秒的sql记录
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+    minIdle: 1
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: select 'x'
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxOpenPreparedStatements: 20
+    #是否初始化数据库
+    initialize: true

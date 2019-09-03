@@ -1,0 +1,27 @@
+version: '3'
+services:
+  # 指定服务名称
+  db:
+    # 指定服务使用的镜像
+    image: mysql:5.5
+    # 指定容器名称
+    container_name: mydb
+    # 指定服务运行的端口
+    ports:
+      - 3306:3306
+    # 指定容器中需要挂载的文件
+    volumes:
+      - "./db:/var/lib/mysql"
+      - "./conf/my.cnf:/etc/my.cnf"
+      - "./init:/docker-entrypoint-initdb.d/"
+    # 指定容器的环境变量
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+  # 指定服务名称
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    # 指定服务运行的端口
+    ports:
+      - 8080:8080
